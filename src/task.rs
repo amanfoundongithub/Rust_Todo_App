@@ -22,7 +22,8 @@ impl Task {
         }
     }
 
-    pub fn print(&self) {
-        println!("{} {} [{}]", self.id, self.description, self.completed);
+    pub fn mark_complete(&mut self) {
+        self.completed = true;
     }
+
 }
