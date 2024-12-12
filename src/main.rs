@@ -5,7 +5,6 @@ use std::io::{self, Write};
 use task::Task;
 
 
-
 fn main() {
     
     // Database 
@@ -44,18 +43,20 @@ fn main() {
                     println!("No tasks found!")
                 } else {
                     println!(
-                        "{:<5} | {:<30} | {:<10}",
-                        "ID", "Description", "Completed"
+                        "{:<5} | {:<30} | {:<10} | {:<12} | {:<12}",
+                        "ID", "Description", "Completed", "Start Date", "Completion Date"
                     );
                     println!("{}", "-".repeat(80));
                     
                     // Print each task
                     for task in &tasks {
                         println!(
-                                "{:<5} | {:<30} | {:<10}",
-                                    task.id,
-                                    task.description,
-                                    if task.completed { "Yes" } else { "No" });
+                               "{:<5} | {:<30} | {:<10} | {:<12} | {:<12}",
+                                task.id,
+                                task.description,
+                                if task.completed { "Yes" } else { "No" },
+                                task.assign_date,
+                                task.complete_date.map_or("N/A".to_string(), |d| d.to_string()));
                     }
                 }
             }
@@ -117,7 +118,6 @@ fn main() {
                     println!("Invalid ID type!");
                 }
             }
-
 
             "exit" => {
                 break;
