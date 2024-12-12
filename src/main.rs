@@ -16,7 +16,7 @@ fn main() {
     loop {
         println!("\nToDo App");
 
-        print!("Your choice (add/print/delete/completed):");
+        print!("Your choice (add/print/find/complete/delete):");
         io::stdout().flush().unwrap();
 
         // Take the choice
@@ -60,7 +60,26 @@ fn main() {
                 }
             }
 
-            "completed" => {
+            "find" => {
+                print!("Enter task ID:");
+                io::stdout().flush().unwrap();
+
+                let mut id : String = String::new();
+                io::stdin().read_line(&mut id).unwrap();
+
+                // Parse to integer 
+                if let Ok(id) = id.trim().parse::<usize>() {
+                    if let Some(task) = tasks.iter_mut().find(|t| t.id == id) {
+                        task.print();
+                    } else {
+                        println!("Task not found!");
+                    }
+                } else {
+                    println!("Invalid ID type!");
+                }
+            }
+            
+            "complete" => {
                 print!("Enter task ID:");
                 io::stdout().flush().unwrap();
 
@@ -80,7 +99,25 @@ fn main() {
                 }
             }
 
-            
+            "delete" => {
+                print!("Enter task ID:");
+                io::stdout().flush().unwrap();
+
+                let mut id : String = String::new();
+                io::stdin().read_line(&mut id).unwrap();
+
+                // Parse to integer 
+                if let Ok(id) = id.trim().parse::<usize>() {
+                    if let Some(_task) = tasks.iter_mut().find(|t| t.id == id) {
+                        tasks.retain(|task| task.id != id);
+                    } else {
+                        println!("Task not found!");
+                    }
+                } else {
+                    println!("Invalid ID type!");
+                }
+            }
+
 
             "exit" => {
                 break;
