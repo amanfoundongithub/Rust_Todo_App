@@ -26,4 +26,12 @@ impl Task {
         self.completed = true;
     }
 
+    pub fn print(&mut self) {
+        println!("--------------------------");
+        println!("|\tTask ID : {}", self.id);
+        println!("|\tDescription : {}", self.description);
+        println!("|\tCompleted? {}", if self.completed {"Yes"} else {"No"});
+        println!("--------------------------");
+    }
+
 }
